@@ -88,3 +88,13 @@ fn a_clean_ring_marks_nothing() {
     assert!(warns.is_empty(), "{warns:?}");
     assert!(warned_mask(&warns, t.moves.len()).is_empty());
 }
+
+#[test]
+fn a_holder_hit_names_its_move() {
+    // #395's lathe holder warning locates one move, like the other `at`
+    // warnings - the viewport marks it and a click frames it.
+    use camcraft_app::verify::Warning;
+    let w = Warning::HolderHit { at: 7, part: true, short_mm: 0.4 };
+    assert_eq!(camcraft_app::warned_moves::moves_named(&w), [Some(7), None]);
+    assert_eq!(camcraft_app::warned_moves::first_move(&w), Some(7));
+}

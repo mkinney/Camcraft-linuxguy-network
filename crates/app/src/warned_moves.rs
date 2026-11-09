@@ -29,7 +29,8 @@ pub fn moves_named(w: &Warning) -> [Option<usize>; 2] {
         | Warning::FixtureHit { at, .. }
         | Warning::NonFinite { at }
         | Warning::Envelope { at, .. }
-        | Warning::Scallop { at, .. } => [Some(*at), None],
+        | Warning::Scallop { at, .. }
+        | Warning::HolderHit { at, .. } => [Some(*at), None],
         Warning::RestUnjudged { .. } => [None, None],
     }
 }
